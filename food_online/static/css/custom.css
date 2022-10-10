@@ -1,0 +1,13 @@
+@keyframes show-toast{
+    0% {bottom:-100%}
+    20% {bottom:50%}
+    80% {bottom:50%}
+    100% {bottom:-100%}
+}
+.show-notifications{
+    position: fixed;
+    bottom: 100%;
+    right: 20px;
+    animation-name: show-toast;
+    animation-duration: 40s;
+}
