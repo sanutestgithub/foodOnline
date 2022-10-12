@@ -1,5 +1,4 @@
-from distutils.command.upload import upload
-import profile
+
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser,BaseUserManager
 
@@ -39,10 +38,10 @@ class UserManager(BaseUserManager):
         
 
 class User(AbstractBaseUser):
-    RESTAURENT = 1
+    VENDOR = 1
     CUSTOMER = 2
     ROLE_CHOICE =(
-        (RESTAURENT,'RESTAURENT'),
+        (VENDOR,'VENDOR'),
         (CUSTOMER,'CUSTOMER'),
     )
     first_name=models.CharField(max_length=50)
@@ -73,6 +72,15 @@ class User(AbstractBaseUser):
     
     def has_module_perms(self,app_label):
         return True
+
+    def get_role(self):
+        if self.role == 1:
+            user_role ='VENDOR'
+        elif self.role == 2:
+            user_role ='CUSTOMER'
+            return user_role
+
+
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,blank=True,null =True)
